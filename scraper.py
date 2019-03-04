@@ -9,7 +9,7 @@ def process(applications):
     for row in applications['rows']:
         output = {}
         output['council_reference'] = row['application_number']
-        output['address'] = row['field_coc_address'] + row['field_coc_suburb_ref']
+        output['address'] = row['field_coc_address'] + ' ' + row['field_coc_suburb_ref']
         output['description'] = row['field_coc_proposal']
         output['info_url'] = url + row['field_coc_pdf'].strip('\n')
         output['comment_url'] = 'mailto:caseycc@casey.vic.gov.au'
@@ -20,7 +20,7 @@ def process(applications):
         date = dateutil.parser.parse(row['field_coc_date'], dayfirst=True)
         output['on_notice_to'] = date.strftime('%Y-%m-%d')
         try:
-            alreadyExists = scraperwiki.sql.select('* FROM data WHERE council_reference=?', [da['council_reference']])
+            alreadyExists = scraperwiki.sql.select('* FROM data WHERE council_reference=?', [output['council_reference']])
         except:
             alreadyExists = False
 
