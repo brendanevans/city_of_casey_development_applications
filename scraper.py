@@ -25,9 +25,9 @@ def process(applications):
             alreadyExists = False
 
         if alreadyExists:
-            print('Skipping: {}'.format(output['council_reference']))
+            print(f"Skipping: {output['council_reference']}")
         else:
-            print('Saving: {}'.format(output['council_reference']))
+            print(f"Saving: {output['council_reference']}")
             scraperwiki.sql.save(unique_keys=['council_reference'], data=output, table_name='data')
 
 url = 'https://www.casey.vic.gov.au/api/planning-applications'
